@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Encuesta_Acme.Entidades;
 using Encuesta_Acme.Models;
 using Encuesta_Acme.Servicios;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,7 @@ namespace Encuesta_Acme.Controllers
             return Ok(encuestas);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "ObtenerPorId")]
         public async Task<ActionResult<Encuesta>> GetByID(int id)
         {
             var encuesta = await encuestaService.GetById(id);
@@ -57,17 +58,14 @@ namespace Encuesta_Acme.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] EncuestaDTO encuestaDTO)
+        public async Task<ActionResult> Post([FromBody] EncuestaDTO encuestaDTO)
         {
             if (encuestaDTO == null)
                 return BadRequest();
 
-            var encuesta = mapper.Map<Encuesta>(encuestaDTO);
-            encuesta.Id = AcmeList.Count() + 1;
+            var resultadoId = await encuestaService.Post(encuestaDTO);
 
-            AcmeList.Add(encuesta);
-
-            return Ok();
+            return CreatedAtRoute("ObtenerPorId", new {id = resultadoId}, encuestaDTO);
         }
 
 

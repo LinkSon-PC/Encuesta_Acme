@@ -1,4 +1,6 @@
-﻿namespace Encuesta_Acme.Models
+﻿using Encuesta_Acme.Entidades;
+
+namespace Encuesta_Acme.Models
 {
     public class CampoDTO
     {

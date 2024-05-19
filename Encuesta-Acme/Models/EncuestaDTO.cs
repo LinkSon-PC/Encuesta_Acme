@@ -8,5 +8,7 @@ namespace Encuesta_Acme.Models
         public string Nombre { get; set; }
         [Required]
         public string Descripcion { get; set; }
+        [Required]
+        public List<CampoDTO> Campos { get; set; }
     }
 }

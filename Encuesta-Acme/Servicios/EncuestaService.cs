@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Encuesta_Acme.Entidades;
 using Encuesta_Acme.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace Encuesta_Acme.Servicios
 
         public async Task<IEnumerable<Encuesta>> Get()
         {
-            return await context.Encuestas.ToListAsync();
+            return await context.Encuestas.Include(x => x.Campos).ToListAsync();
         }
 
         public Task<Encuesta> GetById(int id)
@@ -25,9 +26,12 @@ namespace Encuesta_Acme.Servicios
             return context.Encuestas.FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public void Post(EncuestaDTO encuestaDTO)
+        public async Task<int> Post(EncuestaDTO encuestaDTO)
         {
-            throw new NotImplementedException();
+            var resultado = mapper.Map<Encuesta>(encuestaDTO);
+            context.Encuestas.Add(resultado);
+            await context.SaveChangesAsync();
+            return resultado.Id;
         }
     }
 }

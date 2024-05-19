@@ -1,4 +1,5 @@
-﻿using Encuesta_Acme.Models;
+﻿using Encuesta_Acme.Entidades;
+using Encuesta_Acme.Models;
 
 namespace Encuesta_Acme.Servicios
 {
@@ -6,6 +7,6 @@ namespace Encuesta_Acme.Servicios
     {
         public Task<IEnumerable<Encuesta>> Get();
         public Task<Encuesta> GetById(int id);
-        public void Post(EncuestaDTO encuestaDTO);
+        public Task<int> Post(EncuestaDTO encuestaDTO);
     }
 }

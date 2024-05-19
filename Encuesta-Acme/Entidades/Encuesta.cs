@@ -1,4 +1,5 @@
-﻿namespace Encuesta_Acme.Models
+﻿namespace Encuesta_Acme.Entidades
+
 {
     public class Encuesta
     {
