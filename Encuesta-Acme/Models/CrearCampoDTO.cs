@@ -2,9 +2,8 @@
 
 namespace Encuesta_Acme.Models
 {
-    public class CampoDTO
+    public class CrearCampoDTO
     {
-        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Titulo { get; set; }
         public bool Requerido { get; set; }

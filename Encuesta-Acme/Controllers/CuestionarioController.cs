@@ -32,14 +32,6 @@ namespace Encuesta_Acme.Controllers
             return respuesta;
         }
 
-        [HttpGet("respuestas/{id:int}")]
-        public async Task<ActionResult<List<EncuestaRespuestaDTO>>> GetEncuestasRespuestas(int id)
-        {
-            var encuesta = await respuestaServices.GetRespuestasById(id);
-            if (encuesta == null) { return NotFound(); }
-            return Ok(encuesta);
-        }
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Encuesta>> GetEncuesta(int id)
         {
@@ -49,7 +41,7 @@ namespace Encuesta_Acme.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] EncuestaRespuestaDTO respuestaDTO)
+        public async Task<ActionResult> Post([FromBody] CrearEncuestaRespuestaDTO respuestaDTO)
         {
             try
             {
@@ -65,9 +57,6 @@ namespace Encuesta_Acme.Controllers
             {
                 return BadRequest(e.Message);
             }
-            //if (respuestaDTO == null) return BadRequest();
-
-            //var encuestaId = await respuestaServices.Post(respuestaDTO);
 
         }
 

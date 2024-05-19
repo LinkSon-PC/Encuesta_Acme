@@ -17,7 +17,7 @@ namespace Encuesta_Acme.Servicios
             this.mapper = mapper;
         }
 
-        public async Task<int> Post(EncuestaRespuestaDTO respuestaDTO)
+        public async Task<int> Post(CrearEncuestaRespuestaDTO respuestaDTO)
         {
             var encuesta = await context.Encuestas
             .Include(s => s.Campos)
@@ -100,16 +100,6 @@ namespace Encuesta_Acme.Servicios
             return true;
         }
 
-        public async Task<IEnumerable<EncuestaRespuestaDTO>> GetRespuestasById(int id)
-        {
-            var respuesta = await context.EncuestaRespuestas
-                .Include(e => e.CampoRespuestas)
-                .Where(e => e.EncuestaId == id)
-                .ToListAsync();
-
-            var encuestasRespuestasDTO = mapper.Map<List<EncuestaRespuestaDTO>>(respuesta);
-            return encuestasRespuestasDTO;
-        }
 
         public async Task<EncuestaRespuestaDTO> GetRespuestaById(int id)
         {

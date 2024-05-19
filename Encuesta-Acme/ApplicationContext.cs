@@ -22,29 +22,29 @@ namespace Encuesta_Acme
                 .HasMany(c => c.Campos)
                 .WithOne(e => e.Encuesta)
                 .HasForeignKey(e => e.EncuestaId)
-                .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Campo>()
-                .Property(e => e.TipoCampo)
-                .HasConversion<string>();
+            modelBuilder.Entity<Encuesta>()
+                .HasMany(s => s.Respuestas)
+                .WithOne(r => r.Encuesta)
+                .HasForeignKey(r => r.EncuestaId)
+            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<EncuestaRespuesta>()
                 .HasMany(e => e.CampoRespuestas)
                 .WithOne(r => r.EncuestaRespuesta)
                 .HasForeignKey(e => e.EncuestaRespuestaId)
-                .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<EncuestaCampoRespuesta>()
-                .HasOne(fr => fr.EncuestaRespuesta)
-                .WithMany()
-                .HasForeignKey(fr => fr.EncuestaRespuestaId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Campo>()
+            .HasMany(f => f.CampoRespuestas)
+            .WithOne(fr => fr.Campo)
+            .HasForeignKey(fr => fr.CampoId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<EncuestaCampoRespuesta>()
-                .HasOne(e => e.EncuestaRespuesta)
-                .WithMany(r => r.CampoRespuestas)
-                .HasForeignKey(r => r.EncuestaRespuestaId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Campo>()
+                .Property(e => e.TipoCampo)
+                .HasConversion<string>();
         }
     }
 }

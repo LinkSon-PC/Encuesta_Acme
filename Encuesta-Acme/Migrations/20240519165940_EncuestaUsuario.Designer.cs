@@ -4,6 +4,7 @@ using Encuesta_Acme;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encuesta_Acme.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240519165940_EncuestaUsuario")]
+    partial class EncuestaUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Encuesta_Acme.Migrations
 
                     b.HasIndex("EncuestaId");
 
-                    b.ToTable("Campos", (string)null);
+                    b.ToTable("Campos");
                 });
 
             modelBuilder.Entity("Encuesta_Acme.Entidades.Encuesta", b =>
@@ -74,7 +76,7 @@ namespace Encuesta_Acme.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Encuestas", (string)null);
+                    b.ToTable("Encuestas");
                 });
 
             modelBuilder.Entity("Encuesta_Acme.Entidades.EncuestaCampoRespuesta", b =>
@@ -100,7 +102,7 @@ namespace Encuesta_Acme.Migrations
 
                     b.HasIndex("EncuestaRespuestaId");
 
-                    b.ToTable("EncuesatCampoRespuesta", (string)null);
+                    b.ToTable("EncuesatCampoRespuesta");
                 });
 
             modelBuilder.Entity("Encuesta_Acme.Entidades.EncuestaRespuesta", b =>
@@ -118,7 +120,7 @@ namespace Encuesta_Acme.Migrations
 
                     b.HasIndex("EncuestaId");
 
-                    b.ToTable("EncuestaRespuestas", (string)null);
+                    b.ToTable("EncuestaRespuestas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -324,7 +326,7 @@ namespace Encuesta_Acme.Migrations
                     b.HasOne("Encuesta_Acme.Entidades.Encuesta", "Encuesta")
                         .WithMany("Campos")
                         .HasForeignKey("EncuestaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Encuesta");
@@ -342,9 +344,9 @@ namespace Encuesta_Acme.Migrations
             modelBuilder.Entity("Encuesta_Acme.Entidades.EncuestaCampoRespuesta", b =>
                 {
                     b.HasOne("Encuesta_Acme.Entidades.Campo", "Campo")
-                        .WithMany("CampoRespuestas")
+                        .WithMany()
                         .HasForeignKey("CampoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Encuesta_Acme.Entidades.EncuestaRespuesta", "EncuestaRespuesta")
@@ -361,9 +363,9 @@ namespace Encuesta_Acme.Migrations
             modelBuilder.Entity("Encuesta_Acme.Entidades.EncuestaRespuesta", b =>
                 {
                     b.HasOne("Encuesta_Acme.Entidades.Encuesta", "Encuesta")
-                        .WithMany("Respuestas")
+                        .WithMany()
                         .HasForeignKey("EncuestaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Encuesta");
@@ -420,16 +422,9 @@ namespace Encuesta_Acme.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Encuesta_Acme.Entidades.Campo", b =>
-                {
-                    b.Navigation("CampoRespuestas");
-                });
-
             modelBuilder.Entity("Encuesta_Acme.Entidades.Encuesta", b =>
                 {
                     b.Navigation("Campos");
-
-                    b.Navigation("Respuestas");
                 });
 
             modelBuilder.Entity("Encuesta_Acme.Entidades.EncuestaRespuesta", b =>

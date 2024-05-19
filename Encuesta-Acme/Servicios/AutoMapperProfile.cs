@@ -8,19 +8,20 @@ namespace Encuesta_Acme.Servicios
     {
         public AutoMapperProfile()
         {
-            CreateMap<EncuestaRespuestaDTO, EncuestaRespuesta>()
+            CreateMap<CrearEncuestaRespuestaDTO, EncuestaRespuesta>()
                 .ForMember(x => x.CampoRespuestas, opciones => opciones.MapFrom(MapEncuestaCampoRespuesta));
             CreateMap<EncuestaRespuesta, EncuestaRespuestaDTO>()
                 .ForMember(x => x.CampoRespuestas, opciones => opciones.MapFrom(MapEncuestaCampoRespuestDTO));
             CreateMap<EncuestaCampoRespuestaDTO, EncuestaCampoRespuesta>().ReverseMap();
 
-            CreateMap<EncuestaDTO, Encuesta>()
+            CreateMap<CrearEncuestaDTO, Encuesta>()
                 .ForMember(x => x.Campos, opciones => opciones.MapFrom(MapCampoDTOEncuesta));
             CreateMap<Encuesta, EncuestaDTO>();
+            CreateMap<ModificarEncuestaDTO, Encuesta>();
             CreateMap<Campo, CampoDTO>().ReverseMap();
         }
 
-        private List<EncuestaCampoRespuesta> MapEncuestaCampoRespuesta(EncuestaRespuestaDTO encuestaDTO, EncuestaRespuesta encuesta)
+        private List<EncuestaCampoRespuesta> MapEncuestaCampoRespuesta(CrearEncuestaRespuestaDTO encuestaDTO, EncuestaRespuesta encuesta)
         {
             var resultado = new List<EncuestaCampoRespuesta>();
 
@@ -56,7 +57,7 @@ namespace Encuesta_Acme.Servicios
             return resultado;
         }
 
-        private List<Campo> MapCampoDTOEncuesta(EncuestaDTO encuestaDTO, Encuesta encuesta)
+        private List<Campo> MapCampoDTOEncuesta(CrearEncuestaDTO encuestaDTO, Encuesta encuesta)
         {
             var resultado = new List<Campo>();
 
