@@ -72,6 +72,7 @@ namespace Encuesta_Acme.Servicios
             var encuesta = await context.Encuestas
                 .Include(x => x.Campos)
                 .Where(x => x.UsuarioId == usuarioId)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (encuesta == null)

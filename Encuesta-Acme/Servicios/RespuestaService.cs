@@ -73,34 +73,6 @@ namespace Encuesta_Acme.Servicios
             return encuesta;
         }
 
-        public async Task<bool> ValidarExisteEncuesta(EncuestaRespuestaDTO respuestaDTO)
-        {
-
-            var camposEncuesta = await context.Encuestas
-                .Include(x => x.Campos)
-                .FirstOrDefaultAsync(e => e.Id == respuestaDTO.EncuestaId);
-
-            if (camposEncuesta == null)
-                return false;
-
-            return true;
-        }
-
-        public async Task<bool> ValidarEncuestaCamposRespuesta(EncuestaRespuestaDTO respuestaDTO)
-        {
-
-            var camposEncuesta = await context.Encuestas
-                .Include (x => x.Campos)
-                .Where(e => e.Id == respuestaDTO.EncuestaId)
-                .Select(x => x.Campos).ToListAsync();
-
-            if (camposEncuesta == null)
-                return false;
-
-            return true;
-        }
-
-
         public async Task<EncuestaRespuestaDTO> GetRespuestaById(int id)
         {
             var respuesta = await context.EncuestaRespuestas

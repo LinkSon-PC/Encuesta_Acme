@@ -8,6 +8,5 @@ namespace Encuesta_Acme.Servicios
         public Task<Encuesta> GetById(int id);
         public Task<int> Post(CrearEncuestaRespuestaDTO encuestaRespuestaDTO);
         public Task<EncuestaRespuestaDTO> GetRespuestaById(int id);
-        Task<bool> ValidarExisteEncuesta(EncuestaRespuestaDTO respuestaDTO);
     }
 }

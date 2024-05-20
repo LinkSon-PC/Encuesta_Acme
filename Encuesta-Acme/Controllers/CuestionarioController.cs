@@ -14,13 +14,10 @@ namespace Encuesta_Acme.Controllers
     [ApiController]
     public class CuestionarioController : ControllerBase
     {
-        private readonly ApplicationContext context;
-        private readonly IMapper mapper;
         private readonly IRespuestaServices respuestaServices;
 
-        public CuestionarioController(IMapper mapper, IRespuestaServices respuestaServices)
+        public CuestionarioController(IRespuestaServices respuestaServices)
         {
-            this.mapper = mapper;
             this.respuestaServices = respuestaServices;
         }
 

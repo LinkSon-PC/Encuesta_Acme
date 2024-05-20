@@ -28,7 +28,7 @@ namespace Encuesta_Acme
                 .HasMany(s => s.Respuestas)
                 .WithOne(r => r.Encuesta)
                 .HasForeignKey(r => r.EncuestaId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EncuestaRespuesta>()
                 .HasMany(e => e.CampoRespuestas)
@@ -40,7 +40,7 @@ namespace Encuesta_Acme
             .HasMany(f => f.CampoRespuestas)
             .WithOne(fr => fr.Campo)
             .HasForeignKey(fr => fr.CampoId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Campo>()
                 .Property(e => e.TipoCampo)
