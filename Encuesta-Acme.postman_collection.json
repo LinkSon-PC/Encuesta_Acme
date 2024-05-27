@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1792dc2d-b2a3-43e6-a43e-998a3ecb15a6",
+		"_postman_id": "46c5a1e2-1b6b-4a7a-90c6-607837c43823",
 		"name": "Encuesta-Acme",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "12921154"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"aA12345678!\"\r\n}",
+							"raw": "{\r\n  \"email\": \"demo2@example.com\",\r\n  \"password\": \"aA12345678!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,7 +62,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}/api/Encuesta/2"
+						"url": "{{url}}/api/Encuesta/1"
 					},
 					"response": []
 				},
@@ -113,7 +113,7 @@
 								}
 							}
 						},
-						"url": "{{url}}/api/Encuesta/respuestas/2"
+						"url": "{{url}}/api/Encuesta/respuestas/3"
 					},
 					"response": []
 				},
@@ -143,7 +143,7 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{url}}/api/Encuesta/2"
+						"url": "{{url}}/api/Encuesta/1"
 					},
 					"response": []
 				},
@@ -167,7 +167,7 @@
 								}
 							}
 						},
-						"url": "https://localhost:7085/api/Encuesta"
+						"url": "{{url}}/api/Encuesta"
 					},
 					"response": []
 				}
@@ -184,6 +184,27 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
+							"raw": "{\r\n  \"encuestaId\": 3,\r\n  \"campoRespuestas\": [\r\n    {\r\n      \"campoId\": 6,\r\n      \"respuesta\": \"Anthony S.\"\r\n    },    \r\n    {\r\n      \"campoId\": 7,\r\n      \"respuesta\": \"23\"\r\n    },\r\n    {\r\n      \"campoId\": 8,\r\n      \"respuesta\": \"2024-06-15\"\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/Cuestionario/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Cuestonario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
 							"raw": "{\r\n  \"encuestaId\": 1,\r\n  \"campoRespuestas\": [\r\n    {\r\n      \"campoId\": 1,\r\n      \"respuesta\": \"Anthony\"\r\n    },\r\n    {\r\n      \"campoId\": 2,\r\n      \"respuesta\": \"Masculino\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
@@ -191,7 +212,7 @@
 								}
 							}
 						},
-						"url": "{{url}}/api/Cuestionario"
+						"url": "{{url}}/api/Cuestionario/3"
 					},
 					"response": []
 				}

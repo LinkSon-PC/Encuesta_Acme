@@ -64,13 +64,16 @@ namespace Encuesta_Acme.Servicios
             return encuestaRespuesta.Id;
         }
 
-        public async Task<Encuesta> GetById(int id)
+        public async Task<VerEncuestaDTO> GetById(int id)
         {
             var encuesta = await context.Encuestas
                 .Include(x => x.Campos)
                 .FirstOrDefaultAsync(e => e.Id == id);
 
-            return encuesta;
+            if (encuesta == null) 
+                throw new KeyNotFoundException("Encuesta no encontrada");
+
+            return mapper.Map<VerEncuestaDTO>(encuesta);
         }
 
         public async Task<EncuestaRespuestaDTO> GetRespuestaById(int id)

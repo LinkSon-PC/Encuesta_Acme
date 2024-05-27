@@ -9,7 +9,7 @@ namespace Encuesta_Acme.Entidades
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public ICollection<Campo> Campos { get; set; }
-        public ICollection<EncuestaRespuesta> Respuestas { get; set; }
+        public ICollection<EncuestaRespuesta> EncuestaRespuestas { get; set; }
         public string UsuarioId { get; set; }
         public IdentityUser Usuario { get; set; }
     }

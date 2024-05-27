@@ -12,13 +12,20 @@ namespace Encuesta_Acme.Servicios
                 .ForMember(x => x.CampoRespuestas, opciones => opciones.MapFrom(MapEncuestaCampoRespuesta));
             CreateMap<EncuestaRespuesta, EncuestaRespuestaDTO>()
                 .ForMember(x => x.CampoRespuestas, opciones => opciones.MapFrom(MapEncuestaCampoRespuestDTO));
+
+            CreateMap<EncuestaRespuesta, VerEncuestaRespuestaDTO>();
+
             CreateMap<EncuestaCampoRespuestaDTO, EncuestaCampoRespuesta>().ReverseMap();
+            CreateMap<EncuestaCampoRespuesta, VerEncuestaCampoRespuestaDTO>().ReverseMap();
 
             CreateMap<CrearEncuestaDTO, Encuesta>()
                 .ForMember(x => x.Campos, opciones => opciones.MapFrom(MapCampoDTOEncuesta));
             CreateMap<Encuesta, EncuestaDTO>();
+            CreateMap<Encuesta, VerEncuestaDTO>();
             CreateMap<ModificarEncuestaDTO, Encuesta>();
             CreateMap<Campo, CampoDTO>().ReverseMap();
+            CreateMap<Campo, VerCampoDTO>().ReverseMap();
+
         }
 
         private List<EncuestaCampoRespuesta> MapEncuestaCampoRespuesta(CrearEncuestaRespuestaDTO encuestaDTO, EncuestaRespuesta encuesta)
@@ -49,6 +56,7 @@ namespace Encuesta_Acme.Servicios
             {
                 resultado.Add(new EncuestaCampoRespuestaDTO()
                 {
+                    Id = campoRespuesta.Id,
                     CampoId = campoRespuesta.CampoId,
                     Respuesta = campoRespuesta.Respuesta
                 });

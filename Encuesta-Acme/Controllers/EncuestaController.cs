@@ -105,15 +105,23 @@ namespace Encuesta_Acme.Controllers
         {
             var emailClaim = HttpContext.User.Claims.Where(claim => claim.Type == "email").FirstOrDefault();
             var email = emailClaim.Value.ToString();
-            var usuario = await userManager.FindByEmailAsync(email);
 
+            var usuario = await userManager.FindByEmailAsync(email);
 
             if (encuestaDTO == null)
                 return BadRequest();
 
             var resultadoId = await encuestaService.Post(encuestaDTO, usuario.Id);
 
-            return CreatedAtRoute("ObtenerPorId", new {id = resultadoId}, encuestaDTO);
+            var url = Url.Action(nameof(CuestionarioController.Post), "Cuestionario", new {id = resultadoId});
+
+            var responderEncuesta = new ResponderEncuestaCreadaDTO()
+            {
+                crearEncuesta = encuestaDTO,
+                Url = url
+            };
+
+            return CreatedAtRoute("ObtenerPorId", new {id = resultadoId}, responderEncuesta);
         }
 
     }

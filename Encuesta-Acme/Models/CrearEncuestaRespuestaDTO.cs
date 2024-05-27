@@ -1,8 +1,8 @@
 ﻿namespace Encuesta_Acme.Models
 {
-    public class CrearEncuestaRespuestaDTO
+    public class VerEncuestaRespuestaDTO
     {
-        public int EncuestaId { get; set; }
-        public ICollection<CrearEncuestaCampoRespuestaDTO> CampoRespuestas { get; set; }
+        public int Id { get; set; }
+        public ICollection<VerEncuestaCampoRespuestaDTO> CampoRespuestas { get; set; }
     }
 }

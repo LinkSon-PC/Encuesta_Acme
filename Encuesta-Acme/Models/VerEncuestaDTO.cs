@@ -2,13 +2,11 @@
 
 namespace Encuesta_Acme.Models
 {
-    public class CrearEncuestaDTO
+    public class VerEncuestaDTO
     {
-        [Required]
+        public int Id { get; set; }
         public string Nombre { get; set; }
-        [Required]
         public string Descripcion { get; set; }
-        [Required]
-        public List<CrearCampoDTO> Campos { get; set; }
+        public List<VerCampoDTO> Campos { get; set; }
     }
 }

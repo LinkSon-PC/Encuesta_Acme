@@ -38,7 +38,7 @@ namespace Encuesta_Acme.Servicios
             return encuestaDTO;
         }
 
-        public async Task<IEnumerable<EncuestaRespuestaDTO>> GetRespuestasById(int id, string usuarioId)
+        public async Task<IEnumerable<VerEncuestaRespuestaDTO>> GetRespuestasById(int id, string usuarioId)
         {
             var respuesta = await context.EncuestaRespuestas
                 .Include(e => e.CampoRespuestas)
@@ -46,7 +46,7 @@ namespace Encuesta_Acme.Servicios
                 .Where(e => e.EncuestaId == id && e.Encuesta.UsuarioId == usuarioId)
                 .ToListAsync();
         
-            var encuestasRespuestasDTO = mapper.Map<List<EncuestaRespuestaDTO>>(respuesta);
+            var encuestasRespuestasDTO = mapper.Map<List<VerEncuestaRespuestaDTO>>(respuesta);
             return encuestasRespuestasDTO;
         }
 
@@ -70,10 +70,9 @@ namespace Encuesta_Acme.Servicios
         public async Task Delete(int id, string usuarioId)
         {
             var encuesta = await context.Encuestas
-                .Include(x => x.Campos)
-                .Where(x => x.UsuarioId == usuarioId)
+                .Where(x => x.UsuarioId == usuarioId && x.Id == id)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.Id == id);
+                .FirstOrDefaultAsync();
 
             if (encuesta == null)
                 throw new KeyNotFoundException("Encuesta no encontrada");

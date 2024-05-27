@@ -29,22 +29,31 @@ namespace Encuesta_Acme.Controllers
             return respuesta;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Encuesta>> GetEncuesta(int id)
+        [HttpGet("{id:int}", Name = "verEncuesta")]
+        public async Task<ActionResult<VerEncuestaDTO>> GetEncuesta(int id)
         {
-            var encuesta = await respuestaServices.GetById(id);
-            if (encuesta == null) { return NotFound(); }
-            return Ok(encuesta);
+            try
+            {
+                var encuesta = await respuestaServices.GetById(id);
+                if (encuesta == null) { return NotFound(); }
+                return Ok(encuesta);
+            }catch (KeyNotFoundException e) { 
+                return NotFound(e.Message);
+            }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CrearEncuestaRespuestaDTO respuestaDTO)
+        [HttpPost("{id:int}", Name = "responderCuestionario")]
+        public async Task<ActionResult> Post(int id, [FromBody] CrearEncuestaRespuestaDTO respuestaDTO)
         {
+            if((respuestaDTO == null) || (id != respuestaDTO.EncuestaId)) {
+                return BadRequest("ID encuesta incorrecto"); 
+            }
+
             try
             {
                 var encuestaId = await respuestaServices.Post(respuestaDTO);
 
-                return CreatedAtRoute("ObtenerEncuestaRepuestaPorId", new { id = encuestaId }, respuestaDTO);
+                return CreatedAtRoute("verEncuesta", new { id = encuestaId }, respuestaDTO);
             }
             catch (KeyNotFoundException e)
             {
